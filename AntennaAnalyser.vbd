@@ -5,7 +5,7 @@ DEFBOARD
    filename    "AntennaAnalyser.vbd"
 
    created     "25/05/2014 17:01:23"
-   lastsaved   "27/05/2014 08:31:37"
+   lastsaved   "27/05/2014 19:02:06"
 
    boardsize   31 holes, 38 tracks
 
@@ -661,7 +661,7 @@ DEFBOARD
       position 14,28
 
       defanno  6
-      message  "+8v"
+      message  "+9v"
       txtstyle "Courier New" 10pt bold
       position 14,22
 
@@ -681,7 +681,7 @@ DEFBOARD
       position 24,25
 
       defanno  10
-      message  "7808"
+      message  "7809"
       txtstyle "Courier New" 10pt bold
       position 22,21
 
@@ -701,7 +701,7 @@ DEFBOARD
       position 24,27
 
       defanno  14
-      message  "  < +8v"
+      message  "  < +9v"
       txtstyle "Courier New" 10pt bold
       position 31,23
 
