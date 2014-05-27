@@ -1,0 +1,1205 @@
+[VeroDes board definition file v0.01]
+
+DEFBOARD
+{
+   filename    "AntennaAnalyser.vbd"
+
+   created     "25/05/2014 17:01:23"
+   lastsaved   "27/05/2014 08:31:37"
+
+   boardsize   31 holes, 38 tracks
+
+   components  41
+   {
+      defcompo 1
+      devid    "DDSMOD"
+      label    ""
+      lblopp   False
+      position 2,4
+      rotation none
+      value    "AD9850 Module"
+      userdev  True
+
+      defcompo 2
+      devid    "ARDMIC"
+      label    ""
+      lblopp   True
+      position 5,21
+      rotation none
+      value    "Arduino Micro"
+      userdev  True
+
+      defcompo 3
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 15,24
+      rotation none
+      userdev  False
+
+      defcompo 4
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 15,23
+      rotation none
+      userdev  False
+
+      defcompo 5
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 15,27
+      rotation none
+      userdev  False
+
+      defcompo 6
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 31,26
+      rotation none
+      userdev  False
+
+      defcompo 7
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 31,25
+      rotation none
+      userdev  False
+
+      defcompo 8
+      devid    "VREG"
+      label    ""
+      lblopp   False
+      position 26,25
+      rotation none
+      userdev  True
+
+      defcompo 9
+      devid    "VREG"
+      label    ""
+      lblopp   True
+      position 23,25
+      rotation invert
+      userdev  True
+
+      defcompo 10
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 13,5
+      rotation none
+      userdev  False
+
+      defcompo 11
+      devid    "DI_NEW"
+      label    ""
+      lblopp   True
+      position 2,26
+      rotation invert
+      userdev  True
+
+      defcompo 12
+      devid    "CA_NEW"
+      label    ""
+      lblopp   False
+      position 17,5
+      rotation left
+      value    "1uF"
+      userdev  True
+
+      defcompo 13
+      devid    "CA_ELECSMALL"
+      label    ""
+      lblopp   False
+      position 29,26
+      rotation invert
+      value    "10uF"
+      userdev  False
+
+      defcompo 14
+      devid    "CA_ELECSMALL"
+      label    ""
+      lblopp   True
+      position 21,26
+      rotation none
+      value    "10uF"
+      userdev  False
+
+      defcompo 15
+      devid    "CA_ELECSMALL"
+      label    ""
+      lblopp   True
+      position 20,24
+      rotation invert
+      value    "10uF"
+      userdev  False
+
+      defcompo 16
+      devid    "RE_4_SMALL"
+      label    ""
+      lblopp   False
+      position 14,10
+      rotation none
+      value    "649"
+      userdev  True
+
+      defcompo 17
+      devid    "DP_8PIN03"
+      label    ""
+      lblopp   False
+      position 19,12
+      rotation none
+      userdev  False
+
+      defcompo 18
+      devid    "RE_STD2"
+      label    ""
+      lblopp   True
+      position 17,12
+      rotation none
+      value    "10k"
+      userdev  False
+
+      defcompo 19
+      devid    "RE_STD2"
+      label    ""
+      lblopp   False
+      position 18,12
+      rotation none
+      value    "10k"
+      userdev  False
+
+      defcompo 20
+      devid    "CAPA"
+      label    ""
+      lblopp   False
+      position 23,10
+      rotation none
+      value    "10n"
+      userdev  True
+
+      defcompo 21
+      devid    "RE_STD2"
+      label    ""
+      lblopp   False
+      position 23,13
+      rotation none
+      value    "10k"
+      userdev  False
+
+      defcompo 22
+      devid    "RE_STD2"
+      label    ""
+      lblopp   False
+      position 24,13
+      rotation none
+      value    "10k"
+      userdev  False
+
+      defcompo 23
+      devid    "CAPA"
+      label    ""
+      lblopp   False
+      position 16,8
+      rotation none
+      value    "100n"
+      userdev  True
+
+      defcompo 24
+      devid    "DIODE"
+      label    ""
+      lblopp   False
+      position 17,8
+      rotation none
+      userdev  True
+
+      defcompo 25
+      devid    "DIODE"
+      label    ""
+      lblopp   False
+      position 26,8
+      rotation invert
+      userdev  True
+
+      defcompo 26
+      devid    "RE_3SMALL"
+      label    ""
+      lblopp   True
+      position 21,10
+      rotation invert
+      value    "50"
+      userdev  True
+
+      defcompo 27
+      devid    "RE_4_SMALL"
+      label    ""
+      lblopp   True
+      position 22,8
+      rotation invert
+      value    "50"
+      userdev  True
+
+      defcompo 28
+      devid    "CAP4"
+      label    ""
+      lblopp   False
+      position 27,8
+      rotation invert
+      value    "100n"
+      userdev  True
+
+      defcompo 29
+      devid    "RE_4_SMALL"
+      label    ""
+      lblopp   False
+      position 26,5
+      rotation left
+      value    "50"
+      userdev  True
+
+      defcompo 30
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 28,5
+      rotation left
+      userdev  False
+
+      defcompo 31
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 31,5
+      rotation left
+      userdev  False
+
+      defcompo 32
+      devid    "CAP4"
+      label    ""
+      lblopp   False
+      position 15,14
+      rotation none
+      value    "10n"
+      userdev  True
+
+      defcompo 33
+      devid    "RE_4_SMALL"
+      label    ""
+      lblopp   False
+      position 17,14
+      rotation none
+      value    "100k"
+      userdev  True
+
+      defcompo 34
+      devid    "RE_STD3"
+      label    ""
+      lblopp   False
+      position 23,15
+      rotation none
+      value    "100k"
+      userdev  False
+
+      defcompo 35
+      devid    "RE_4_SMALL"
+      label    ""
+      lblopp   False
+      position 27,14
+      rotation none
+      value    "649"
+      userdev  True
+
+      defcompo 36
+      devid    "CAPA"
+      label    ""
+      lblopp   False
+      position 28,15
+      rotation none
+      value    "10n"
+      userdev  True
+
+      defcompo 37
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 24,34
+      rotation none
+      userdev  False
+
+      defcompo 38
+      devid    "CN_SINGLEPIN"
+      label    ""
+      lblopp   False
+      position 15,33
+      rotation none
+      userdev  False
+
+      defcompo 39
+      devid    "RES8SM"
+      label    ""
+      lblopp   False
+      position 29,8
+      rotation none
+      value    "10k"
+      userdev  True
+
+      defcompo 40
+      devid    "RES7SM"
+      label    ""
+      lblopp   False
+      position 13,8
+      rotation none
+      value    "10k"
+      userdev  True
+
+      defcompo 41
+      devid    "RES10SM"
+      label    ""
+      lblopp   False
+      position 1,24
+      rotation none
+      value    "10k"
+      userdev  True
+   }
+
+   wirelinks   22
+   {
+      deflink  1
+      startpos 18,24
+      endpos   18,26
+
+      deflink  2
+      startpos 27,26
+      endpos   27,24
+
+      deflink  3
+      startpos 1,4
+      endpos   1,10
+
+      deflink  4
+      startpos 1,11
+      endpos   1,12
+
+      deflink  5
+      startpos 3,12
+      endpos   3,13
+
+      deflink  6
+      startpos 1,13
+      endpos   1,20
+
+      deflink  7
+      startpos 4,10
+      endpos   4,17
+
+      deflink  8
+      startpos 5,8
+      endpos   5,17
+
+      deflink  9
+      startpos 3,17
+      endpos   3,26
+
+      deflink  10
+      startpos 6,34
+      endpos   6,12
+
+      deflink  11
+      startpos 7,11
+      endpos   7,35
+
+      deflink  12
+      startpos 8,10
+      endpos   8,36
+
+      deflink  13
+      startpos 9,9
+      endpos   9,37
+
+      deflink  14
+      startpos 12,17
+      endpos   12,10
+
+      deflink  15
+      startpos 13,17
+      endpos   13,24
+
+      deflink  16
+      startpos 17,27
+      endpos   17,20
+
+      deflink  17
+      startpos 18,15
+      endpos   18,17
+
+      deflink  18
+      startpos 16,33
+      endpos   16,12
+
+      deflink  19
+      startpos 25,13
+      endpos   25,34
+
+      deflink  20
+      startpos 30,20
+      endpos   30,12
+
+      deflink  21
+      startpos 31,17
+      endpos   31,10
+
+      deflink  22
+      startpos 30,10
+      endpos   30,5
+   }
+
+   trackbreaks 58
+   {
+      defbreak 1
+      position 12,37
+
+      defbreak 2
+      position 9,36
+
+      defbreak 3
+      position 8,35
+
+      defbreak 4
+      position 7,34
+
+      defbreak 5
+      position 6,33
+
+      defbreak 6
+      position 6,32
+
+      defbreak 7
+      position 6,31
+
+      defbreak 8
+      position 6,30
+
+      defbreak 9
+      position 6,29
+
+      defbreak 10
+      position 6,28
+
+      defbreak 11
+      position 6,27
+
+      defbreak 12
+      position 6,26
+
+      defbreak 13
+      position 6,25
+
+      defbreak 14
+      position 6,24
+
+      defbreak 15
+      position 6,23
+
+      defbreak 16
+      position 6,22
+
+      defbreak 17
+      position 6,21
+
+      defbreak 18
+      position 12,25
+
+      defbreak 19
+      position 12,21
+
+      defbreak 20
+      position 12,22
+
+      defbreak 21
+      position 12,27
+
+      defbreak 22
+      position 12,28
+
+      defbreak 23
+      position 12,29
+
+      defbreak 24
+      position 12,30
+
+      defbreak 25
+      position 12,31
+
+      defbreak 26
+      position 12,32
+
+      defbreak 27
+      position 26,34
+
+      defbreak 28
+      position 12,35
+
+      defbreak 29
+      position 3,4
+
+      defbreak 30
+      position 3,5
+
+      defbreak 31
+      position 3,6
+
+      defbreak 32
+      position 3,7
+
+      defbreak 33
+      position 3,8
+
+      defbreak 34
+      position 3,9
+
+      defbreak 35
+      position 5,12
+
+      defbreak 36
+      position 4,13
+
+      defbreak 37
+      position 6,11
+
+      defbreak 38
+      position 7,10
+
+      defbreak 39
+      position 8,9
+
+      defbreak 40
+      position 11,4
+
+      defbreak 41
+      position 11,6
+
+      defbreak 42
+      position 11,7
+
+      defbreak 43
+      position 11,8
+
+      defbreak 44
+      position 11,9
+
+      defbreak 45
+      position 11,10
+
+      defbreak 46
+      position 11,11
+
+      defbreak 47
+      position 11,12
+
+      defbreak 48
+      position 11,13
+
+      defbreak 49
+      position 12,36
+
+      defbreak 50
+      position 12,26
+
+      defbreak 51
+      position 3,24
+
+      defbreak 52
+      position 16,5
+
+      defbreak 53
+      position 10,37
+
+      defbreak 54
+      position 19,8
+
+      defbreak 55
+      position 24,8
+
+      defbreak 56
+      position 24,5
+
+      defbreak 57
+      position 29,5
+
+      defbreak 58
+      position 17,33
+   }
+
+   annotations 47
+   {
+      defanno  1
+      message  "  < GND"
+      txtstyle "Courier New" 10pt bold
+      position 31,17
+
+      defanno  2
+      message  "  < +5v"
+      txtstyle "Courier New" 10pt bold
+      position 31,20
+
+      defanno  3
+      message  "FWD"
+      txtstyle "Courier New" 10pt bold
+      position 14,34
+
+      defanno  4
+      message  "REV"
+      txtstyle "Courier New" 10pt bold
+      position 23,35
+
+      defanno  5
+      message  "+5v"
+      txtstyle "Courier New" 10pt bold
+      position 14,28
+
+      defanno  6
+      message  "+8v"
+      txtstyle "Courier New" 10pt bold
+      position 14,22
+
+      defanno  7
+      message  "RF"
+      txtstyle "Courier New" 10pt bold
+      position 12,3
+
+      defanno  8
+      message  "GND"
+      txtstyle "Courier New" 10pt bold
+      position 14,25
+
+      defanno  9
+      message  "In"
+      txtstyle "Courier New" 10pt bold
+      position 24,25
+
+      defanno  10
+      message  "7808"
+      txtstyle "Courier New" 10pt bold
+      position 22,21
+
+      defanno  11
+      message  "7805"
+      txtstyle "Courier New" 10pt bold
+      position 26,29
+
+      defanno  12
+      message  "Out"
+      txtstyle "Courier New" 10pt bold
+      position 24,23
+
+      defanno  13
+      message  "Out"
+      txtstyle "Courier New" 10pt bold
+      position 24,27
+
+      defanno  14
+      message  "  < +8v"
+      txtstyle "Courier New" 10pt bold
+      position 31,23
+
+      defanno  15
+      message  "AD9850 DDS"
+      txtstyle "Courier New" 10pt bold
+      position 2,2
+
+      defanno  16
+      message  "C5"
+      txtstyle "Courier New" 10pt bold
+      position 13,15
+
+      defanno  17
+      message  "  < GND"
+      txtstyle "Courier New" 10pt bold
+      position 31,10
+
+      defanno  18
+      message  "R1"
+      txtstyle "Courier New" 10pt bold
+      position 24,4
+
+      defanno  19
+      message  "ANT"
+      txtstyle "Courier New" 10pt bold
+      position 27,3
+
+      defanno  20
+      message  "ANT"
+      txtstyle "Courier New" 10pt bold
+      position 30,3
+
+      defanno  21
+      message  "R2"
+      txtstyle "Courier New" 10pt bold
+      position 20,6
+
+      defanno  22
+      message  "C2"
+      txtstyle "Courier New" 10pt bold
+      position 25,6
+
+      defanno  23
+      message  "D1"
+      txtstyle "Courier New" 10pt bold
+      position 24,7
+
+      defanno  24
+      message  "D2"
+      txtstyle "Courier New" 10pt bold
+      position 18,7
+
+      defanno  25
+      message  "R4"
+      txtstyle "Courier New" 10pt bold
+      position 28,11
+
+      defanno  26
+      message  "C3"
+      txtstyle "Courier New" 10pt bold
+      position 28,18
+
+      defanno  27
+      message  "R7"
+      txtstyle "Courier New" 10pt bold
+      position 26,13
+
+      defanno  28
+      message  "C4"
+      txtstyle "Courier New" 10pt bold
+      position 15,7
+
+      defanno  29
+      message  "R10"
+      txtstyle "Courier New" 10pt bold
+      position 17,11
+
+      defanno  30
+      message  "R6"
+      txtstyle "Courier New" 10pt bold
+      position 24,12
+
+      defanno  31
+      message  "R11"
+      txtstyle "Courier New" 10pt bold
+      position 14,11
+
+      defanno  32
+      message  "LED1"
+      txtstyle "Courier New" 10pt bold
+      position 1,22
+
+      defanno  33
+      message  "R12"
+      txtstyle "Courier New" 10pt bold
+      position 2,29
+
+      defanno  34
+      message  "R8"
+      txtstyle "Courier New" 10pt bold
+      position 12,7
+
+      defanno  35
+      message  "C1"
+      txtstyle "Courier New" 10pt bold
+      position 18,5
+
+      defanno  36
+      message  "R3"
+      txtstyle "Courier New" 10pt bold
+      position 19,9
+
+      defanno  37
+      message  "C6"
+      txtstyle "Courier New" 10pt bold
+      position 24,10
+
+      defanno  38
+      message  "R5"
+      txtstyle "Courier New" 10pt bold
+      position 23,16
+
+      defanno  39
+      message  "R9"
+      txtstyle "Courier New" 10pt bold
+      position 16,16
+
+      defanno  40
+      message  "U2"
+      txtstyle "Courier New" 10pt bold
+      position 20,14
+
+      defanno  41
+      message  "U1"
+      txtstyle "Courier New" 10pt bold
+      position 6,37
+
+      defanno  42
+      message  "C9"
+      txtstyle "Courier New" 10pt bold
+      position 19,22
+
+      defanno  43
+      message  "C8"
+      txtstyle "Courier New" 10pt bold
+      position 20,28
+
+      defanno  44
+      message  "C7"
+      txtstyle "Courier New" 10pt bold
+      position 28,24
+
+      defanno  45
+      message  "  +12v IN"
+      txtstyle "Courier New" 10pt bold
+      position 31,25
+
+      defanno  46
+      message  "  GND IN"
+      txtstyle "Courier New" 10pt bold
+      position 31,26
+
+      defanno  47
+      message  "TEST"
+      txtstyle "Courier New" 10pt bold
+      position 12,4
+   }
+}
+
+
+; ###########################
+; ### EMBEDDED COMPONENTS ###
+; ###########################
+
+DEFCOMPONENT
+{
+   name        "AD9850 Module"
+   identifier  "DDSMOD"
+   category    "Miscellaneous"
+   pins        20
+   {
+      pin      1 at 2,4 home
+      pin      2 at 2,5
+      pin      3 at 2,6
+      pin      4 at 2,7
+      pin      5 at 2,8
+      pin      6 at 2,9
+      pin      7 at 2,10
+      pin      8 at 2,11
+      pin      9 at 2,12
+      pin      10 at 2,13
+      pin      11 at 10,4
+      pin      12 at 10,5
+      pin      13 at 10,6
+      pin      14 at 10,7
+      pin      15 at 10,8
+      pin      16 at 10,9
+      pin      17 at 10,10
+      pin      18 at 10,11
+      pin      19 at 10,12
+      pin      20 at 10,13
+   }
+   rects       1
+   {
+      rect     1 at 4,8 - 136,212
+   }
+   circs       0
+   lines       0
+}
+
+DEFCOMPONENT
+{
+   name        "Arduino Micro"
+   identifier  "ARDMIC"
+   category    "Miscellaneous"
+   pins        34
+   {
+      pin      1 at 1,2 home
+      pin      2 at 1,3
+      pin      3 at 1,4
+      pin      4 at 1,5
+      pin      5 at 1,6
+      pin      6 at 1,7
+      pin      7 at 1,8
+      pin      8 at 1,9
+      pin      9 at 1,10
+      pin      10 at 1,11
+      pin      11 at 1,12
+      pin      12 at 1,13
+      pin      13 at 1,14
+      pin      14 at 1,15
+      pin      15 at 1,16
+      pin      16 at 1,17
+      pin      17 at 1,18
+      pin      18 at 7,2
+      pin      19 at 7,3
+      pin      20 at 7,4
+      pin      21 at 7,5
+      pin      22 at 7,6
+      pin      23 at 7,7
+      pin      24 at 7,8
+      pin      25 at 7,9
+      pin      26 at 7,10
+      pin      27 at 7,11
+      pin      28 at 7,12
+      pin      29 at 7,13
+      pin      30 at 7,14
+      pin      31 at 7,15
+      pin      32 at 7,16
+      pin      33 at 7,17
+      pin      34 at 7,18
+   }
+   rects       1
+   {
+      rect     1 at 4,8 - 88,224
+   }
+   circs       0
+   lines       0
+}
+
+DEFCOMPONENT
+{
+   name        "78xx Voltage Regulator"
+   identifier  "VREG"
+   category    "Semiconductors"
+   pins        3
+   {
+      pin      1 at 1,1 home anno "In"
+      pin      2 at 1,2 negative anno "Com"
+      pin      3 at 1,3 anno "Out"
+   }
+   rects       1
+   {
+      rect     1 at 4,4 - 16,40
+   }
+   circs       0
+   lines       0
+}
+
+DEFCOMPONENT
+{
+   name        "Big LED"
+   identifier  "DI_NEW"
+   category    "Diodes"
+   pins        2
+   {
+      pin      1 at 3,2 home negative anno "-ve"
+      pin      2 at 3,4
+   }
+   rects       0
+   circs       1
+   {
+      circ     1 at 38,34, 26
+   }
+   lines       1
+   {
+      line     1 at 28,16 - 16,0
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Electrolyric over 3 with -ve"
+   identifier  "CA_NEW"
+   category    "Capacitors"
+   pins        2
+   {
+      pin      1 at 3,5
+      pin      2 at 3,3 home negative anno "-ve"
+   }
+   rects       0
+   circs       1
+   {
+      circ     1 at 36,46, 18
+   }
+   lines       0
+}
+
+DEFCOMPONENT
+{
+   name        "Resistor over 4 holes small"
+   identifier  "RE_4_SMALL"
+   category    "Resistors"
+   pins        2
+   {
+      pin      1 at 1,1 home
+      pin      2 at 1,4 float
+   }
+   rects       1
+   {
+      rect     1 at 8,20 - 8,20
+   }
+   circs       0
+   lines       2
+   {
+      line     1 at 12,16 - 0,4
+      line     2 at 12,40 - 0,4
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Cap over 3"
+   identifier  "CAPA"
+   category    "Capacitors"
+   pins        2
+   {
+      pin      1 at 1,1 home
+      pin      2 at 1,3
+   }
+   rects       1
+   {
+      rect     1 at 8,20 - 8,8
+   }
+   circs       0
+   lines       3
+   {
+      line     1 at 12,36 - 0,0
+      line     2 at 12,28 - 0,8
+      line     3 at 12,12 - 0,8
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Diode"
+   identifier  "DIODE"
+   category    "Diodes"
+   pins        2
+   {
+      pin      1 at 2,2 home negative anno "-ve"
+      pin      2 at 5,2 anno "+ve"
+   }
+   rects       0
+   circs       0
+   lines       6
+   {
+      line     1 at 36,16 - 0,16
+      line     2 at 36,24 - 8,-8
+      line     3 at 44,16 - 0,16
+      line     4 at 36,24 - 8,8
+      line     5 at 24,24 - 12,0
+      line     6 at 44,24 - 16,0
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Resistor over 3 holes, small"
+   identifier  "RE_3SMALL"
+   category    "Resistors"
+   pins        2
+   {
+      pin      1 at 1,1 home
+      pin      2 at 1,3 float
+   }
+   rects       1
+   {
+      rect     1 at 8,20 - 8,8
+   }
+   circs       0
+   lines       2
+   {
+      line     1 at 12,12 - 0,8
+      line     2 at 12,28 - 0,4
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Cap over 4"
+   identifier  "CAP4"
+   category    "Capacitors"
+   pins        2
+   {
+      pin      1 at 6,2 home
+      pin      2 at 6,5
+   }
+   rects       1
+   {
+      rect     1 at 68,36 - 8,12
+   }
+   circs       0
+   lines       2
+   {
+      line     1 at 72,28 - 0,8
+      line     2 at 72,56 - 0,-8
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Resistor over 8 small"
+   identifier  "RES8SM"
+   category    "Resistors"
+   pins        2
+   {
+      pin      1 at 4,1 home
+      pin      2 at 4,8
+   }
+   rects       1
+   {
+      rect     1 at 44,40 - 8,28
+   }
+   circs       0
+   lines       2
+   {
+      line     1 at 48,12 - 0,28
+      line     2 at 48,96 - 0,-28
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Resistor over 7 small"
+   identifier  "RES7SM"
+   category    "Resistors"
+   pins        2
+   {
+      pin      1 at 3,2 home
+      pin      2 at 3,8
+   }
+   rects       1
+   {
+      rect     1 at 32,48 - 8,24
+   }
+   circs       0
+   lines       2
+   {
+      line     1 at 36,28 - 0,20
+      line     2 at 36,92 - 0,-20
+   }
+}
+
+DEFCOMPONENT
+{
+   name        "Resistor over 10 small "
+   identifier  "RES10SM"
+   category    "Resistors"
+   pins        2
+   {
+      pin      1 at 3,2 home
+      pin      2 at 3,11
+   }
+   rects       1
+   {
+      rect     1 at 32,68 - 8,24
+   }
+   circs       0
+   lines       3
+   {
+      line     1 at 36,68 - 0,-40
+      line     2 at 32,92 - 0,0
+      line     3 at 36,92 - 0,36
+   }
+}
+
+; ###################
+; ### END OF FILE ###
+; ###################
