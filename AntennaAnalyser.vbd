@@ -5,7 +5,7 @@ DEFBOARD
    filename    "AntennaAnalyser.vbd"
 
    created     "25/05/2014 17:01:23"
-   lastsaved   "27/05/2014 19:02:06"
+   lastsaved   "28/05/2014 08:39:45"
 
    boardsize   31 holes, 38 tracks
 
@@ -316,7 +316,7 @@ DEFBOARD
       devid    "CAPA"
       label    ""
       lblopp   False
-      position 28,15
+      position 24,15
       rotation none
       value    "10n"
       userdev  True
@@ -396,67 +396,67 @@ DEFBOARD
       endpos   4,17
 
       deflink  8
-      startpos 5,8
-      endpos   5,17
-
-      deflink  9
       startpos 3,17
       endpos   3,26
 
-      deflink  10
+      deflink  9
       startpos 6,34
       endpos   6,12
 
-      deflink  11
+      deflink  10
       startpos 7,11
       endpos   7,35
 
-      deflink  12
+      deflink  11
       startpos 8,10
       endpos   8,36
 
-      deflink  13
+      deflink  12
       startpos 9,9
       endpos   9,37
 
-      deflink  14
+      deflink  13
       startpos 12,17
       endpos   12,10
 
-      deflink  15
+      deflink  14
       startpos 13,17
       endpos   13,24
 
-      deflink  16
+      deflink  15
       startpos 17,27
       endpos   17,20
 
-      deflink  17
+      deflink  16
       startpos 18,15
       endpos   18,17
 
-      deflink  18
+      deflink  17
       startpos 16,33
       endpos   16,12
 
-      deflink  19
+      deflink  18
       startpos 25,13
       endpos   25,34
 
-      deflink  20
+      deflink  19
       startpos 30,20
       endpos   30,12
 
-      deflink  21
+      deflink  20
       startpos 31,17
       endpos   31,10
 
-      deflink  22
+      deflink  21
       startpos 30,10
       endpos   30,5
+
+      deflink  22
+      startpos 5,10
+      endpos   5,8
    }
 
-   trackbreaks 58
+   trackbreaks 66
    {
       defbreak 1
       position 12,37
@@ -546,94 +546,118 @@ DEFBOARD
       position 3,4
 
       defbreak 30
-      position 3,5
-
-      defbreak 31
       position 3,6
 
-      defbreak 32
+      defbreak 31
       position 3,7
 
-      defbreak 33
+      defbreak 32
       position 3,8
 
-      defbreak 34
+      defbreak 33
       position 3,9
 
-      defbreak 35
+      defbreak 34
       position 5,12
 
-      defbreak 36
+      defbreak 35
       position 4,13
 
-      defbreak 37
+      defbreak 36
       position 6,11
 
-      defbreak 38
+      defbreak 37
       position 7,10
 
-      defbreak 39
+      defbreak 38
       position 8,9
 
-      defbreak 40
+      defbreak 39
       position 11,4
 
-      defbreak 41
+      defbreak 40
       position 11,6
 
-      defbreak 42
+      defbreak 41
       position 11,7
 
-      defbreak 43
+      defbreak 42
       position 11,8
 
-      defbreak 44
+      defbreak 43
       position 11,9
 
-      defbreak 45
+      defbreak 44
       position 11,10
 
-      defbreak 46
+      defbreak 45
       position 11,11
 
-      defbreak 47
+      defbreak 46
       position 11,12
 
-      defbreak 48
+      defbreak 47
       position 11,13
 
-      defbreak 49
+      defbreak 48
       position 12,36
 
-      defbreak 50
+      defbreak 49
       position 12,26
 
-      defbreak 51
+      defbreak 50
       position 3,24
 
-      defbreak 52
+      defbreak 51
       position 16,5
 
-      defbreak 53
+      defbreak 52
       position 10,37
 
-      defbreak 54
+      defbreak 53
       position 19,8
 
-      defbreak 55
+      defbreak 54
       position 24,8
 
-      defbreak 56
+      defbreak 55
       position 24,5
 
-      defbreak 57
+      defbreak 56
       position 29,5
 
-      defbreak 58
+      defbreak 57
       position 17,33
+
+      defbreak 58
+      position 20,12
+
+      defbreak 59
+      position 20,13
+
+      defbreak 60
+      position 20,14
+
+      defbreak 61
+      position 20,15
+
+      defbreak 62
+      position 9,5
+
+      defbreak 63
+      position 3,5
+
+      defbreak 64
+      position 9,4
+
+      defbreak 65
+      position 9,6
+
+      defbreak 66
+      position 9,7
    }
 
-   annotations 47
+   annotations 46
    {
       defanno  1
       message  "  < GND"
@@ -701,171 +725,166 @@ DEFBOARD
       position 24,27
 
       defanno  14
-      message  "  < +9v"
-      txtstyle "Courier New" 10pt bold
-      position 31,23
-
-      defanno  15
       message  "AD9850 DDS"
       txtstyle "Courier New" 10pt bold
       position 2,2
 
-      defanno  16
+      defanno  15
       message  "C5"
       txtstyle "Courier New" 10pt bold
       position 13,15
 
-      defanno  17
+      defanno  16
       message  "  < GND"
       txtstyle "Courier New" 10pt bold
       position 31,10
 
-      defanno  18
+      defanno  17
       message  "R1"
       txtstyle "Courier New" 10pt bold
       position 24,4
 
-      defanno  19
+      defanno  18
       message  "ANT"
       txtstyle "Courier New" 10pt bold
       position 27,3
 
-      defanno  20
+      defanno  19
       message  "ANT"
       txtstyle "Courier New" 10pt bold
       position 30,3
 
-      defanno  21
+      defanno  20
       message  "R2"
       txtstyle "Courier New" 10pt bold
       position 20,6
 
-      defanno  22
+      defanno  21
       message  "C2"
       txtstyle "Courier New" 10pt bold
       position 25,6
 
-      defanno  23
+      defanno  22
       message  "D1"
       txtstyle "Courier New" 10pt bold
       position 24,7
 
-      defanno  24
+      defanno  23
       message  "D2"
       txtstyle "Courier New" 10pt bold
       position 18,7
 
-      defanno  25
+      defanno  24
       message  "R4"
       txtstyle "Courier New" 10pt bold
       position 28,11
 
-      defanno  26
+      defanno  25
       message  "C3"
       txtstyle "Courier New" 10pt bold
-      position 28,18
+      position 23,18
 
-      defanno  27
+      defanno  26
       message  "R7"
       txtstyle "Courier New" 10pt bold
       position 26,13
 
-      defanno  28
+      defanno  27
       message  "C4"
       txtstyle "Courier New" 10pt bold
       position 15,7
 
-      defanno  29
+      defanno  28
       message  "R10"
       txtstyle "Courier New" 10pt bold
       position 17,11
 
-      defanno  30
+      defanno  29
       message  "R6"
       txtstyle "Courier New" 10pt bold
       position 24,12
 
-      defanno  31
+      defanno  30
       message  "R11"
       txtstyle "Courier New" 10pt bold
       position 14,11
 
-      defanno  32
+      defanno  31
       message  "LED1"
       txtstyle "Courier New" 10pt bold
       position 1,22
 
-      defanno  33
+      defanno  32
       message  "R12"
       txtstyle "Courier New" 10pt bold
       position 2,29
 
-      defanno  34
+      defanno  33
       message  "R8"
       txtstyle "Courier New" 10pt bold
       position 12,7
 
-      defanno  35
+      defanno  34
       message  "C1"
       txtstyle "Courier New" 10pt bold
       position 18,5
 
-      defanno  36
+      defanno  35
       message  "R3"
       txtstyle "Courier New" 10pt bold
       position 19,9
 
-      defanno  37
+      defanno  36
       message  "C6"
       txtstyle "Courier New" 10pt bold
       position 24,10
 
-      defanno  38
+      defanno  37
       message  "R5"
       txtstyle "Courier New" 10pt bold
-      position 23,16
+      position 21,16
 
-      defanno  39
+      defanno  38
       message  "R9"
       txtstyle "Courier New" 10pt bold
       position 16,16
 
-      defanno  40
+      defanno  39
       message  "U2"
       txtstyle "Courier New" 10pt bold
       position 20,14
 
-      defanno  41
+      defanno  40
       message  "U1"
       txtstyle "Courier New" 10pt bold
       position 6,37
 
-      defanno  42
+      defanno  41
       message  "C9"
       txtstyle "Courier New" 10pt bold
       position 19,22
 
-      defanno  43
+      defanno  42
       message  "C8"
       txtstyle "Courier New" 10pt bold
       position 20,28
 
-      defanno  44
+      defanno  43
       message  "C7"
       txtstyle "Courier New" 10pt bold
       position 28,24
 
-      defanno  45
+      defanno  44
       message  "  +12v IN"
       txtstyle "Courier New" 10pt bold
       position 31,25
 
-      defanno  46
+      defanno  45
       message  "  GND IN"
       txtstyle "Courier New" 10pt bold
       position 31,26
 
-      defanno  47
+      defanno  46
       message  "TEST"
       txtstyle "Courier New" 10pt bold
       position 12,4
