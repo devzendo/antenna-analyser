@@ -5,11 +5,11 @@ DEFBOARD
    filename    "AntennaAnalyser.vbd"
 
    created     "25/05/2014 17:01:23"
-   lastsaved   "30/05/2014 08:02:09"
+   lastsaved   "28/05/2014 08:39:45"
 
    boardsize   31 holes, 38 tracks
 
-   components  42
+   components  41
    {
       defcompo 1
       devid    "DDSMOD"
@@ -363,14 +363,6 @@ DEFBOARD
       rotation none
       value    "10k"
       userdev  True
-
-      defcompo 42
-      devid    "CN_SINGLEPIN"
-      label    ""
-      lblopp   False
-      position 14,17
-      rotation none
-      userdev  False
    }
 
    wirelinks   22
@@ -665,7 +657,7 @@ DEFBOARD
       position 9,7
    }
 
-   annotations 47
+   annotations 46
    {
       defanno  1
       message  "  < GND"
@@ -896,11 +888,6 @@ DEFBOARD
       message  "TEST"
       txtstyle "Courier New" 10pt bold
       position 12,4
-
-      defanno  47
-      message  "GND"
-      txtstyle "Courier New" 10pt bold
-      position 13,18
    }
 }
 
