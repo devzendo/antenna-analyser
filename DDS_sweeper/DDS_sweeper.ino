@@ -24,7 +24,7 @@ const int INTLED=13;
 
 int brightness = 0;    // how bright the LED is
 int fadeAmount = 1;    // how many points to fade the LED by
-int countdown = 255;   // only change brightness when this wraps round zero, so no delay needed
+int countdown = 1024;   // only change brightness when this wraps round zero, so no delay needed
 
 double Fstart_MHz = 1;  // Start Frequency for sweep
 double Fstop_MHz = 10;  // Stop Frequency for sweep
@@ -128,7 +128,7 @@ void fade() {
   countdown --;
 
   if (countdown == 0) {
-    countdown = 255;
+    countdown = 1024;
 
     analogWrite(INTLED, brightness);    
     // change the brightness for next time through the loop:
