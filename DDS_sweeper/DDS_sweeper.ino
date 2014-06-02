@@ -17,6 +17,14 @@ const int SDAT=11;
 const int SCLK=9;
 const int RESET=12;
 
+// "Scan in progress" LED on M0CUV boar
+const int LED=8;
+// Inbuilt LED on Arduino Micro, fades waiting for input
+const int INTLED=13;
+
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 1;    // how many points to fade the LED by
+int countdown = 255;   // only change brightness when this wraps round zero, so no delay needed
 
 double Fstart_MHz = 1;  // Start Frequency for sweep
 double Fstop_MHz = 10;  // Stop Frequency for sweep
@@ -35,7 +43,8 @@ void setup() {
   pinMode(RESET,OUTPUT);
   
   // Configure LED pin for digital output
-  pinMode(13,OUTPUT);
+  pinMode(LED,OUTPUT);
+  pinMode(INTLED,OUTPUT);
 
 
   // Set up analog inputs on A0 and A1, internal reference voltage
@@ -111,6 +120,25 @@ void loop() {
     }
     Serial.flush();     
   } 
+  
+  fade();
+}
+
+void fade() {
+  countdown --;
+
+  if (countdown == 0) {
+    countdown = 255;
+
+    analogWrite(INTLED, brightness);    
+    // change the brightness for next time through the loop:
+    brightness = brightness + fadeAmount;
+
+    // reverse the direction of the fading at the ends of the fade: 
+    if (brightness == 0 || brightness == 255) {
+      fadeAmount = -fadeAmount ; 
+    }     
+  }  
 }
 
 void Perform_sweep(){
@@ -118,7 +146,9 @@ void Perform_sweep(){
   double REV=0;
   double VSWR;
   double Fstep_MHz = (Fstop_MHz-Fstart_MHz)/num_steps;
- 
+  
+  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+
   // Start loop 
   for(int i=0;i<=num_steps;i++){
     // Calculate current frequency
@@ -150,6 +180,8 @@ void Perform_sweep(){
   // Send "End" to PC to indicate end of sweep
   Serial.println("End");
   Serial.flush();    
+
+  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
 }
 
 void SetDDSFreq(double Freq_Hz){
