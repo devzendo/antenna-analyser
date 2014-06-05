@@ -113,7 +113,7 @@ void loop() {
       Serial.print("Start Freq:");
       Serial.println(Fstart_MHz*1000000);
       Serial.print("Stop Freq:");
-      Serial.println(Fstart_MHz*1000000);
+      Serial.println(Fstop_MHz*1000000);
       Serial.print("Num Steps:");
       Serial.println(num_steps);
       break;
