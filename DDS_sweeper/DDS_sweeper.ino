@@ -17,7 +17,7 @@ const int SDAT=11;
 const int SCLK=9;
 const int RESET=12;
 
-// "Scan in progress" LED on M0CUV boar
+// "Scan in progress" LED on M0CUV board
 const int LED=8;
 // Inbuilt LED on Arduino Micro, fades waiting for input
 const int INTLED=13;
@@ -89,7 +89,7 @@ void loop() {
       serial_input_number=0;
       break;
     case 'B':
-      //Turn frequency into FStart
+      //Turn frequency into FStop
       Fstop_MHz = ((double)serial_input_number)/1000000;
       serial_input_number=0;
       break;
@@ -151,6 +151,11 @@ void Perform_sweep(){
 
   // Start loop 
   for(int i=0;i<=num_steps;i++){
+    
+    if(Serial.available()>0) {
+      Serial.println("Stop");
+      break;
+    }
     // Calculate current frequency
     current_freq_MHz = Fstart_MHz + i*Fstep_MHz;
     // Set DDS to current frequency
