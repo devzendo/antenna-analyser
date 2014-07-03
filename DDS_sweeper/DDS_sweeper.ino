@@ -32,7 +32,7 @@ double current_freq_MHz; // Temp variable used during sweep
 long serial_input_number; // Used to build number from serial stream
 int num_steps = 100; // Number of steps to use in the sweep
 char incoming_char; // Character read from serial stream
-
+int settle_delay = 10; // How long to wait after setting the frequency before reading the voltages.
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -55,14 +55,11 @@ void setup() {
   // initialize serial communication at 57600 baud
   Serial.begin(57600);
 
-
   // Reset the DDS
-  digitalWrite(RESET,HIGH);
-  digitalWrite(RESET,LOW);
+  ResetDDS();
   
-  //Initialise the incoming serial number to zero
+  // Initialise the incoming serial number to zero
   serial_input_number=0;
-
 }
 
 // the loop routine runs over and over again forever:
@@ -96,17 +93,36 @@ void loop() {
     case 'C':
       //Turn frequency into FStart and set DDS output to single frequency
       Fstart_MHz = ((double)serial_input_number)/1000000;
-      SetDDSFreq(Fstart_MHz);
+      SetDDSFreq(Fstart_MHz*1000000);
       serial_input_number=0;    
+      break;
+    case 'D':
+      // Set the settle delay in the sweep
+      settle_delay = serial_input_number;
+      serial_input_number=0;
       break;
     case 'N':
       // Set number of steps in the sweep
       num_steps = serial_input_number;
       serial_input_number=0;
       break;
+    case 'Q':
+    case 'q':
+      Serial.println("K6BEZ Antenna Analyser, modifications by M0CUV");
+      Serial.println("Commands: ABCDNQSRV?");
+      break;
     case 'S':    
     case 's':    
       Perform_sweep();
+      break;
+    case 'R':    
+    case 'r':    
+      ResetDDS();
+      Serial.println("Reset");
+      break;
+    case 'V':
+    case 'v':
+      Read_voltages();
       break;
     case '?':
       // Report current configuration to PC    
@@ -161,7 +177,7 @@ void Perform_sweep(){
     // Set DDS to current frequency
     SetDDSFreq(current_freq_MHz*1000000);
     // Wait a little for settling
-    delay(10);
+    delay(settle_delay);
     // Read the forawrd and reverse voltages
     REV = analogRead(A0);
     FWD = analogRead(A1);
@@ -187,9 +203,40 @@ void Perform_sweep(){
   Serial.flush();    
 
   digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+  ResetDDS();
+}
+
+void Read_voltages() {
+  double FWD=0;
+  double REV=0;
+  double VSWR;
+  // Read the forawrd and reverse voltages
+  REV = analogRead(A0);
+  FWD = analogRead(A1);
+  if (REV >= FWD) {
+    // To avoid a divide by zero or negative VSWR then set to max 999
+    VSWR = 999;
+  } else {
+    // Calculate VSWR
+    VSWR = (FWD+REV)/(FWD-REV);
+  }
+  Serial.print("VSWR: ");
+  Serial.print(int(VSWR*1000));
+  Serial.print(", Forward: ");
+  Serial.print(FWD);
+  Serial.print(", Reverse: ");
+  Serial.println(REV);
+}
+
+void ResetDDS() {
+  digitalWrite(RESET,HIGH);
+  digitalWrite(RESET,LOW);
 }
 
 void SetDDSFreq(double Freq_Hz){
+//      Serial.print("SetDDSFreq(");
+//      Serial.print(Freq_Hz);
+//      Serial.println(")");
   // Calculate the DDS word - from AD9850 Datasheet
   int32_t f = Freq_Hz * 4294967295/125000000;
   // Send one byte at a time
