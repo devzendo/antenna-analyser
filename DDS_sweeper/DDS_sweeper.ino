@@ -17,7 +17,7 @@ const int SDAT=11;
 const int SCLK=9;
 const int RESET=12;
 
-// "Scan in progress" LED on M0CUV board
+// "ON/Scan in progress" LED on M0CUV board
 const int LED=8;
 // Inbuilt LED on Arduino Micro, fades waiting for input
 const int INTLED=13;
@@ -45,7 +45,9 @@ void setup() {
   // Configure LED pin for digital output
   pinMode(LED,OUTPUT);
   pinMode(INTLED,OUTPUT);
-
+  
+  // The unit is now "ON"
+  LED_on();
 
   // Set up analog inputs on A0 and A1, internal reference voltage
   pinMode(A0,INPUT);
@@ -157,16 +159,25 @@ void fade() {
   }  
 }
 
+void LED_on() {
+  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+}
+
+void LED_off() {
+  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+}
+
 void Perform_sweep(){
   double FWD=0;
   double REV=0;
   double VSWR;
   double Fstep_MHz = (Fstop_MHz-Fstart_MHz)/num_steps;
+  int LED_voltage = HIGH;
+  int last_flip = 0;
   
-  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
-
   // Start loop 
   for(int i=0;i<=num_steps;i++){
+    digitalWrite(LED, LED_voltage);
     
     if(Serial.available()>0) {
       Serial.println("Stop");
@@ -178,6 +189,13 @@ void Perform_sweep(){
     SetDDSFreq(current_freq_MHz*1000000);
     // Wait a little for settling
     delay(settle_delay);
+
+    last_flip += settle_delay;
+    if (last_flip > 100) {
+      LED_voltage = LED_voltage == HIGH ? LOW : HIGH;
+      last_flip = 0;
+    }
+    
     // Read the forawrd and reverse voltages
     REV = analogRead(A0);
     FWD = analogRead(A1);
@@ -202,7 +220,7 @@ void Perform_sweep(){
   Serial.println("End");
   Serial.flush();    
 
-  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+  LED_on();
   ResetDDS();
 }
 
