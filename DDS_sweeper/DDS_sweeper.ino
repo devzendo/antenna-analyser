@@ -149,7 +149,7 @@ void loop() {
     Serial.flush();     
   } 
   
-  fade();
+  //fade();
 }
 
 void fade() {
@@ -175,6 +175,10 @@ void LED_on() {
 
 void LED_off() {
   digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+}
+
+double analog_read_value(int pin) {
+  return analogRead(pin);
 }
 
 void Perform_sweep(){
@@ -206,8 +210,8 @@ void Perform_sweep(){
     }
     
     // Read the forawrd and reverse voltages
-    REV = analogRead(A0);
-    FWD = analogRead(A1);
+    REV = analog_read_value(A0);
+    FWD = analog_read_value(A1);
 
     if(REV>=FWD){
       // To avoid a divide by zero or negative VSWR then set to max 999
@@ -255,8 +259,8 @@ int duration_so_far = 0;
     }
     
     // Read the forawrd and reverse voltages
-    REV = analogRead(A0);
-    FWD = analogRead(A1);
+    REV = analog_read_value(A0);
+    FWD = analog_read_value(A1);
     Serial.print(duration_so_far / 1000.0);
     Serial.print(" ");
     Serial.print(FWD);
@@ -279,8 +283,8 @@ void Read_voltages() {
   double REV=0;
   double VSWR;
   // Read the forawrd and reverse voltages
-  REV = analogRead(A0);
-  FWD = analogRead(A1);
+  REV = analog_read_value(A0);
+  FWD = analog_read_value(A1);
   if (REV >= FWD) {
     // To avoid a divide by zero or negative VSWR then set to max 999
     VSWR = 999;
