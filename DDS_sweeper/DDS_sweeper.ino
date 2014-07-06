@@ -32,7 +32,8 @@ double current_freq_MHz; // Temp variable used during sweep
 long serial_input_number; // Used to build number from serial stream
 int num_steps = 100; // Number of steps to use in the sweep
 char incoming_char; // Character read from serial stream
-int settle_delay = 10; // How long to wait after setting the frequency before reading the voltages.
+int settle_delay = 10; // How long to wait in ms after setting the frequency before reading the voltages.
+int oscilloscope_duration = 5000; // Send a stream of voltage measurements for this many ms.
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -108,10 +109,19 @@ void loop() {
       num_steps = serial_input_number;
       serial_input_number=0;
       break;
+    case 'M':
+      // Set oscilloscope duration in ms
+      oscilloscope_duration = serial_input_number;
+      serial_input_number=0;
+      break;
+    case 'O':
+    case 'o':
+      Perform_oscilloscope();
+      break;
     case 'Q':
     case 'q':
       Serial.println("K6BEZ Antenna Analyser, modifications by M0CUV");
-      Serial.println("Commands: ABCDNQSRV?");
+      Serial.println("Commands: ABCDMNOQSRV?");
       break;
     case 'S':    
     case 's':    
@@ -185,10 +195,9 @@ void Perform_sweep(){
     }
     // Calculate current frequency
     current_freq_MHz = Fstart_MHz + i*Fstep_MHz;
+    
     // Set DDS to current frequency
     SetDDSFreq(current_freq_MHz*1000000);
-    // Wait a little for settling
-    delay(settle_delay);
 
     last_flip += settle_delay;
     if (last_flip > 100) {
@@ -199,10 +208,11 @@ void Perform_sweep(){
     // Read the forawrd and reverse voltages
     REV = analogRead(A0);
     FWD = analogRead(A1);
+
     if(REV>=FWD){
       // To avoid a divide by zero or negative VSWR then set to max 999
       VSWR = 999;
-    }else{
+    } else {
       // Calculate VSWR
       VSWR = (FWD+REV)/(FWD-REV);
     }
@@ -217,6 +227,46 @@ void Perform_sweep(){
     Serial.println(REV);
   }
   // Send "End" to PC to indicate end of sweep
+  Serial.println("End");
+  Serial.flush();    
+
+  LED_on();
+  ResetDDS();
+}
+
+void Perform_oscilloscope() {
+int duration_so_far = 0;
+  double FWD=0;
+  double REV=0;
+  int LED_voltage = HIGH;
+  int last_flip = 0;
+
+  if (Fstart_MHz != 0) {
+    // Set DDS to A frequency
+    SetDDSFreq(Fstart_MHz*1000000);
+  }
+
+  while (duration_so_far < oscilloscope_duration) {
+    digitalWrite(LED, LED_voltage);
+    last_flip += settle_delay;
+    if (last_flip > 100) {
+      LED_voltage = LED_voltage == HIGH ? LOW : HIGH;
+      last_flip = 0;
+    }
+    
+    // Read the forawrd and reverse voltages
+    REV = analogRead(A0);
+    FWD = analogRead(A1);
+    Serial.print(duration_so_far / 1000.0);
+    Serial.print(" ");
+    Serial.print(FWD);
+    Serial.print(" ");
+    Serial.println(REV);
+
+    delay(settle_delay);
+    duration_so_far += settle_delay;
+  }
+  // Send "End" to PC to indicate end of scope
   Serial.println("End");
   Serial.flush();    
 
@@ -248,13 +298,13 @@ void Read_voltages() {
 
 void ResetDDS() {
   digitalWrite(RESET,HIGH);
+  // tRS = 5 clock cycle reset width:
+  // (5/125,000,000) secs in milliseconds = 4 ms
+  delay(4);
   digitalWrite(RESET,LOW);
 }
 
 void SetDDSFreq(double Freq_Hz){
-//      Serial.print("SetDDSFreq(");
-//      Serial.print(Freq_Hz);
-//      Serial.println(")");
   // Calculate the DDS word - from AD9850 Datasheet
   int32_t f = Freq_Hz * 4294967295/125000000;
   // Send one byte at a time
@@ -265,7 +315,12 @@ void SetDDSFreq(double Freq_Hz){
   send_byte(0);
   // Strobe the Update pin to tell DDS to use values
   digitalWrite(FQ_UD,HIGH);
+  // 7.0ns
+  delay(1);
   digitalWrite(FQ_UD,LOW);
+
+  // Wait a little for settling
+  delay(settle_delay);
 }
 
 void send_byte(byte data_to_send){
