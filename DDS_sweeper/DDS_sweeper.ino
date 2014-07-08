@@ -270,7 +270,7 @@ void Perform_sweep(){
     // Send current line back to PC over serial bus
     Serial.print(current_freq_MHz*1000000);
     Serial.print(",0,");
-    Serial.print(int(VSWR*1000));
+    Serial.print(VSWR*1000.0);
     Serial.print(",");
     Serial.print(FWD);
     Serial.print(",");
