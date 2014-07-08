@@ -149,7 +149,7 @@ void loop() {
     Serial.flush();     
   } 
   
-  //fade();
+  fade();
 }
 
 void fade() {
@@ -177,8 +177,48 @@ void LED_off() {
   digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
 }
 
+double analog_read_value_mean(int pin) {
+double total = 0.0;
+double reading;
+int i;
+  for (i=0; i< 80; i++) {
+    reading = analogRead(pin);
+    total += reading * reading;
+  }
+  return total / 80.0;
+}
+
 double analog_read_value(int pin) {
-  return analogRead(pin);
+const int num_readings = 10; // TODO not sure how many to read yet, to contain the noise and sufficient valid signal to obtain a mode
+double readings[num_readings];
+int occurrences[num_readings];
+double reading;
+int i, j, largestOccurrenceIndex, largestOccurrence;
+
+  // Read for a while
+  for (i = 0; i < num_readings; i++) {
+    readings[i] = analogRead(pin);
+  }
+  
+  // How many occurrences of each reading are there?
+  for (i = 0; i < num_readings; i++) {
+    occurrences[i] = 0;
+    for (j = 0; j < num_readings; j++) {
+      if (readings[j] == readings[i]) {
+        occurrences[i]++;
+      }
+    }
+  }
+
+  // Find the largest number of occurrences
+  for (i = 0, largestOccurrenceIndex = 0, largestOccurrence = 0; i < num_readings; i++) {
+    if (occurrences[i] > largestOccurrence) {
+      largestOccurrence = occurrences[i];
+      largestOccurrenceIndex = i;
+    }
+  }
+  
+  return readings[largestOccurrenceIndex];
 }
 
 void Perform_sweep(){
@@ -188,10 +228,16 @@ void Perform_sweep(){
   double Fstep_MHz = (Fstop_MHz-Fstart_MHz)/num_steps;
   int LED_voltage = HIGH;
   int last_flip = 0;
+
+  // Set the start frequency - sometimes, this doesn't seem to work. Need a way of obtaining feedback that it has worked...
+  SetDDSFreq(Fstart_MHz*1000000);
+  SetDDSFreq(Fstart_MHz*1000000);
+  SetDDSFreq(Fstart_MHz*1000000);
+  SetDDSFreq(Fstart_MHz*1000000);
   
   // Start loop 
   for(int i=0;i<=num_steps;i++){
-    digitalWrite(LED, LED_voltage);
+    //digitalWrite(LED, LED_voltage);
     
     if(Serial.available()>0) {
       Serial.println("Stop");
@@ -213,7 +259,7 @@ void Perform_sweep(){
     REV = analog_read_value(A0);
     FWD = analog_read_value(A1);
 
-    if(REV>=FWD){
+    if(REV >= FWD){
       // To avoid a divide by zero or negative VSWR then set to max 999
       VSWR = 999;
     } else {
@@ -239,6 +285,32 @@ void Perform_sweep(){
 }
 
 void Perform_oscilloscope() {
+const int buffer_size = 64;
+double fwd_values[buffer_size];
+int i;
+
+  if (Fstart_MHz != 0) {
+    // Set DDS to A frequency
+    SetDDSFreq(Fstart_MHz*1000000);
+  }
+
+  for (i = 0; i < buffer_size; i++) {
+    fwd_values[i] = analogRead(A1);
+  }
+  for (i = 0; i < buffer_size; i++) {
+    Serial.print(i);
+    Serial.print(" ");
+    Serial.println(fwd_values[i]);
+  }
+  // Send "End" to PC to indicate end of scope
+  Serial.println("End");
+  Serial.flush();    
+
+  LED_on();
+  ResetDDS();
+}
+
+void Perform_oscilloscope_duration() {
 int duration_so_far = 0;
   double FWD=0;
   double REV=0;
