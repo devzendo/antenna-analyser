@@ -3,8 +3,8 @@
 *  Author  : Beric Dunn (K6BEZ)                                             *
 *  Notice  : Copyright (c) 2013  CC-BY-SA                                   *
 *          : Creative Commons Attribution-ShareAlike 3.0 Unported License   *
-*  Date    : 9/26/2013                                                      *
-*  Version : 1.0                                                            *
+*  Date    : 18 Jul 2014                                                    *
+*  Version : 1.1/M0CUV                                                      *
 *  Notes   : Written using for the Arduino Micro                            *
 *          :   Pins:                                                        *
 *          :    A0 - Reverse Detector Analog in                             *
@@ -33,7 +33,6 @@ long serial_input_number; // Used to build number from serial stream
 int num_steps = 100; // Number of steps to use in the sweep
 char incoming_char; // Character read from serial stream
 int settle_delay = 10; // How long to wait in ms after setting the frequency before reading the voltages.
-int oscilloscope_duration = 5000; // Send a stream of voltage measurements for this many ms.
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -109,11 +108,6 @@ void loop() {
       num_steps = serial_input_number;
       serial_input_number=0;
       break;
-    case 'M':
-      // Set oscilloscope duration in ms
-      oscilloscope_duration = serial_input_number;
-      serial_input_number=0;
-      break;
     case 'O':
     case 'o':
       Perform_oscilloscope();
@@ -121,7 +115,7 @@ void loop() {
     case 'Q':
     case 'q':
       Serial.println("K6BEZ Antenna Analyser, modifications by M0CUV");
-      Serial.println("Commands: ABCDMNOQSRV?");
+      Serial.println("Commands: ABCDNOQSRV?");
       break;
     case 'S':    
     case 's':    
@@ -177,7 +171,13 @@ void LED_off() {
   digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
 }
 
-double analog_read_value_mean(int pin) {
+// An oscilloscope showed some spikes in the detector voltages at regular
+// intervals, so I thought I could filter these out by taking the mode of
+// several measurements. However, the oscilloscope plot of this firmware
+// and the C driver showed that the mode is typically 0, and the smoothed
+// values are sinusoidal. So, just average it. 80 measurements is around
+// two cycles.
+double analog_read_value(int pin) {
 double total = 0.0;
 double reading;
 int i;
@@ -188,39 +188,6 @@ int i;
   return total / 80.0;
 }
 
-double analog_read_value(int pin) {
-const int num_readings = 10; // TODO not sure how many to read yet, to contain the noise and sufficient valid signal to obtain a mode
-double readings[num_readings];
-int occurrences[num_readings];
-double reading;
-int i, j, largestOccurrenceIndex, largestOccurrence;
-
-  // Read for a while
-  for (i = 0; i < num_readings; i++) {
-    readings[i] = analogRead(pin);
-  }
-  
-  // How many occurrences of each reading are there?
-  for (i = 0; i < num_readings; i++) {
-    occurrences[i] = 0;
-    for (j = 0; j < num_readings; j++) {
-      if (readings[j] == readings[i]) {
-        occurrences[i]++;
-      }
-    }
-  }
-
-  // Find the largest number of occurrences
-  for (i = 0, largestOccurrenceIndex = 0, largestOccurrence = 0; i < num_readings; i++) {
-    if (occurrences[i] > largestOccurrence) {
-      largestOccurrence = occurrences[i];
-      largestOccurrenceIndex = i;
-    }
-  }
-  
-  return readings[largestOccurrenceIndex];
-}
-
 void Perform_sweep(){
   double FWD=0;
   double REV=0;
@@ -229,7 +196,8 @@ void Perform_sweep(){
   int LED_voltage = HIGH;
   int last_flip = 0;
 
-  // Set the start frequency - sometimes, this doesn't seem to work. Need a way of obtaining feedback that it has worked...
+  // Set the start frequency - sometimes, this doesn't seem to work.
+  // Need a way of obtaining feedback that it has worked...
   SetDDSFreq(Fstart_MHz*1000000);
   SetDDSFreq(Fstart_MHz*1000000);
   SetDDSFreq(Fstart_MHz*1000000);
@@ -285,8 +253,8 @@ void Perform_sweep(){
 }
 
 void Perform_oscilloscope() {
-const int buffer_size = 64;
-double fwd_values[buffer_size];
+const int buffer_size = 256;
+int fwd_values[buffer_size];
 int i;
 
   if (Fstart_MHz != 0) {
@@ -295,52 +263,12 @@ int i;
   }
 
   for (i = 0; i < buffer_size; i++) {
-    fwd_values[i] = analogRead(A1);
+    fwd_values[i] = (int)analogRead(A1);
   }
   for (i = 0; i < buffer_size; i++) {
     Serial.print(i);
     Serial.print(" ");
     Serial.println(fwd_values[i]);
-  }
-  // Send "End" to PC to indicate end of scope
-  Serial.println("End");
-  Serial.flush();    
-
-  LED_on();
-  ResetDDS();
-}
-
-void Perform_oscilloscope_duration() {
-int duration_so_far = 0;
-  double FWD=0;
-  double REV=0;
-  int LED_voltage = HIGH;
-  int last_flip = 0;
-
-  if (Fstart_MHz != 0) {
-    // Set DDS to A frequency
-    SetDDSFreq(Fstart_MHz*1000000);
-  }
-
-  while (duration_so_far < oscilloscope_duration) {
-    digitalWrite(LED, LED_voltage);
-    last_flip += settle_delay;
-    if (last_flip > 100) {
-      LED_voltage = LED_voltage == HIGH ? LOW : HIGH;
-      last_flip = 0;
-    }
-    
-    // Read the forawrd and reverse voltages
-    REV = analog_read_value(A0);
-    FWD = analog_read_value(A1);
-    Serial.print(duration_so_far / 1000.0);
-    Serial.print(" ");
-    Serial.print(FWD);
-    Serial.print(" ");
-    Serial.println(REV);
-
-    delay(settle_delay);
-    duration_so_far += settle_delay;
   }
   // Send "End" to PC to indicate end of scope
   Serial.println("End");
