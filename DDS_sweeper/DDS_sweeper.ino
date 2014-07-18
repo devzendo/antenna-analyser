@@ -17,6 +17,10 @@ const int SDAT=11;
 const int SCLK=9;
 const int RESET=12;
 
+// Pins for Fwd/Rev detectors
+const int REV_ANALOG_PIN = A0;
+const int FWD_ANALOG_PIN = A1;
+
 // "ON/Scan in progress" LED on M0CUV board
 const int LED=8;
 // Inbuilt LED on Arduino Micro, fades waiting for input
@@ -33,6 +37,7 @@ long serial_input_number; // Used to build number from serial stream
 int num_steps = 100; // Number of steps to use in the sweep
 char incoming_char; // Character read from serial stream
 int settle_delay = 10; // How long to wait in ms after setting the frequency before reading the voltages.
+int oscilloscope_pin = FWD_ANALOG_PIN; // Read the forward detector, unless overridden.
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -49,9 +54,9 @@ void setup() {
   // The unit is now "ON"
   LED_on();
 
-  // Set up analog inputs on A0 and A1, internal reference voltage
-  pinMode(A0,INPUT);
-  pinMode(A1,INPUT);
+  // Set up analog inputs, internal reference voltage
+  pinMode(REV_ANALOG_PIN,INPUT);
+  pinMode(FWD_ANALOG_PIN,INPUT);
   analogReference(INTERNAL);
   
   // initialize serial communication at 57600 baud
@@ -103,6 +108,14 @@ void loop() {
       settle_delay = serial_input_number;
       serial_input_number=0;
       break;
+    case 'E':
+      // Oscilloscope reads rEverse detector
+      oscilloscope_pin = REV_ANALOG_PIN;
+      break;
+    case 'F':
+      // Oscilloscope reads Forward detector
+      oscilloscope_pin = FWD_ANALOG_PIN;
+      break;
     case 'N':
       // Set number of steps in the sweep
       num_steps = serial_input_number;
@@ -115,7 +128,7 @@ void loop() {
     case 'Q':
     case 'q':
       Serial.println("K6BEZ Antenna Analyser, modifications by M0CUV");
-      Serial.println("Commands: ABCDNOQSRV?");
+      Serial.println("Commands: ABCDEFNOQSRV?");
       break;
     case 'S':    
     case 's':    
@@ -224,8 +237,8 @@ void Perform_sweep(){
     }
     
     // Read the forawrd and reverse voltages
-    REV = analog_read_value(A0);
-    FWD = analog_read_value(A1);
+    REV = analog_read_value(REV_ANALOG_PIN);
+    FWD = analog_read_value(FWD_ANALOG_PIN);
 
     if(REV >= FWD){
       // To avoid a divide by zero or negative VSWR then set to max 999
@@ -263,7 +276,7 @@ int i;
   }
 
   for (i = 0; i < buffer_size; i++) {
-    fwd_values[i] = (int)analogRead(A1);
+    fwd_values[i] = (int)analogRead(oscilloscope_pin);
   }
   for (i = 0; i < buffer_size; i++) {
     Serial.print(i);
@@ -283,8 +296,8 @@ void Read_voltages() {
   double REV=0;
   double VSWR;
   // Read the forawrd and reverse voltages
-  REV = analog_read_value(A0);
-  FWD = analog_read_value(A1);
+  REV = analog_read_value(REV_ANALOG_PIN);
+  FWD = analog_read_value(FWD_ANALOG_PIN);
   if (REV >= FWD) {
     // To avoid a divide by zero or negative VSWR then set to max 999
     VSWR = 999;
